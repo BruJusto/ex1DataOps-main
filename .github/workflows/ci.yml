@@ -37,13 +37,13 @@ jobs:
       - name: radon 
         run: |
             python -m radon cc app -a
-# Etapa VI: Geração e Entrega de Artefatos
+
+
       - name: Run Pipeline Script
         run: |
           mkdir -p output
           python app/pipeline.py
-        # Nota: Certifique-se de que seu pipeline.py use caminhos relativos 
-        # ou que você passe os argumentos de entrada/saída aqui.
+       
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -51,12 +51,12 @@ jobs:
           name: summary-report
           path: output/summary.csv
 
-# Etapa VII: Promoção e Entrega Contínua (CD)
+
   deploy:
     name: Deploy
     needs: validate
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' # Só executa se for na branch main
+    if: github.ref == 'refs/heads/main' 
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v4
